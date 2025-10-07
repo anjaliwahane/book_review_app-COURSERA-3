@@ -1,0 +1,13 @@
+fuction getbooklist(){
+
+return new Promise((resolve,reject)=> {
+
+resolve(books);})}
+
+public_users.get('/',function(req,res)){
+
+getBooklist().then{
+
+(bk)=>res.send(JSON.stringify(bk,null,4)),(error)=>
+
+res.send("denied"));});
