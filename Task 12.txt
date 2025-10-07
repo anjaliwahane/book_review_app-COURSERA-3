@@ -1,0 +1,55 @@
+const axios = require('axios');
+
+
+// Function to search books by author
+
+async function searchBooksByAuthor(author) {
+
+  try {
+
+    const response = await axios.get('https://www.googleapis.com/books/v1/volumes', {
+
+      params: {
+
+        q: `inauthor:${author}`, // Search by author
+
+        maxResults: 10, // Limiting results to 10
+
+      },
+
+    });
+
+
+    const books = response.data.items;
+
+    if (books.length > 0) {
+
+      console.log(`Books by ${author}:`);
+
+      books.forEach((book, index) => {
+
+        console.log(`${index + 1}. ${book.volumeInfo.title}`);
+
+      });
+
+    } else {
+
+      console.log(`No books found by ${author}`);
+
+    }
+
+  } catch (error) {
+
+    console.error('Error fetching books:', error.message);
+
+  }
+
+}
+
+
+// Usage: Pass the author name to search for books
+
+const authorName = 'J.K. Rowling'; // Replace with the desired author
+
+searchBooksByAuthor(authorName);
+
